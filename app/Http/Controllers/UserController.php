@@ -6,6 +6,7 @@ use App\Services\UserInterface;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
 {
@@ -23,11 +24,12 @@ class UserController extends Controller
         ]);
     }
 
-    public function doLogin(Request $request): Response
+    public function doLogin(Request $request)
     {
         $username = $request->input('user');
         $password = $request->input('password');
 
+        // dd($username, $password);
         if(empty($username) || empty($password)){
             return response()->view('user.login', [
                 'title' => 'LOGIN',
@@ -46,8 +48,9 @@ class UserController extends Controller
         ]);
     }
 
-    public function doLogout()
+    public function doLogout(Request $request)
     {
-
+        $request->session()->forget('username');
+        return redirect('/');
     }
 }

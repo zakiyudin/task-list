@@ -13,7 +13,7 @@
 <div class="container col-xl-10 col-xxl-8 px-4 py-5">
     @if (isset($error))    
         <div class="alert alert-danger" role="alert">
-            A simple primary alert—check it out!
+            {{ $error }}
         </div>
     @endif
     <div class="row">
@@ -25,7 +25,8 @@
                     Now</a></p>
         </div>
         <div class="col-md-10 mx-auto col-lg-5">
-            <form class="p-4 p-md-5 border rounded-3 bg-light" method="post" action="/login">
+            <form class="p-4 p-md-5 border rounded-3 bg-light" method="POST" action="/doLogin">
+                @method('POST')
                 @csrf
                 <div class="form-floating mb-3">
                     <input name="user" type="text" class="form-control" id="user" placeholder="id">
